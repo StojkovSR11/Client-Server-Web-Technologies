@@ -1,0 +1,91 @@
+package com.example.SVT_KVT.model;
+import jakarta.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+public class Review {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date createdAt;
+
+    @Column(nullable = false)
+    private Integer exerciseCount;
+
+    @Column(nullable = false)
+    private Boolean hidden;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "facility_id", nullable = false)
+    private Facility facility;
+
+    @OneToMany(mappedBy = "review")
+    private List<Rate> rates;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Integer getExerciseCount() {
+		return exerciseCount;
+	}
+
+	public void setExerciseCount(Integer exerciseCount) {
+		this.exerciseCount = exerciseCount;
+	}
+
+	public Boolean getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Facility getFacility() {
+		return facility;
+	}
+
+	public void setFacility(Facility facility) {
+		this.facility = facility;
+	}
+
+	public List<Rate> getRates() {
+		return rates;
+	}
+
+	public void setRates(List<Rate> rates) {
+		this.rates = rates;
+	}
+
+    // Getters and Setters
+    
+}
