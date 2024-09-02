@@ -4,14 +4,14 @@ import { FacilityService } from './facility.service';
 import { Facility } from './facility.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormsModule } from '@angular/forms';  // Dodajte ovaj import
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-facilities',
   templateUrl: './facilities.component.html',
   styleUrls: ['./facilities.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]  // Dodajte FormsModule u imports
+  imports: [CommonModule, FormsModule]
 })
 export class FacilitiesComponent implements OnInit {
   facilities$!: Observable<Facility[]>;
@@ -36,7 +36,9 @@ export class FacilitiesComponent implements OnInit {
       map(facilities =>
         facilities.filter(facility =>
           (this.filters.city ? facility.city.toLowerCase().includes(this.filters.city.toLowerCase()) : true) &&
-          (this.filters.discipline ? facility.description?.toLowerCase().includes(this.filters.discipline.toLowerCase()) : true) &&
+          (this.filters.discipline ? facility.disciplines.some(discipline => 
+            discipline.name.toLowerCase().includes(this.filters.discipline.toLowerCase())
+          ) : true) &&
           (facility.totalRating ? facility.totalRating >= this.filters.minRating : true) &&
           (facility.totalRating ? facility.totalRating <= this.filters.maxRating : true)
         )
@@ -44,7 +46,6 @@ export class FacilitiesComponent implements OnInit {
     );
   }
 }
-
 
 
 

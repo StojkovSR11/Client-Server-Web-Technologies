@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Discipline {
     @Id
@@ -26,6 +28,19 @@ public class Discipline {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@ManyToOne
+    @JoinColumn(name = "facility_id", nullable = false)
+    @JsonIgnore // This annotation will prevent the `facility` field from being serialized
+    private Facility facility;
+
+	public Facility getFacility() {
+		return facility;
+	}
+
+	public void setFacility(Facility facility) {
+		this.facility = facility;
 	}
 
     // Getters and Setters
