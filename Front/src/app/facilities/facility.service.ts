@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Facility } from './facilities/facility.model';  // Correct path
+import { Facility } from './facility.model';  // Correct path
 
 @Injectable({
   providedIn: 'root'
