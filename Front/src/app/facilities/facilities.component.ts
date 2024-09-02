@@ -5,15 +5,17 @@ import { Facility } from './facility.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterOutlet } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-facilities',
   templateUrl: './facilities.component.html',
   styleUrls: ['./facilities.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, RouterOutlet]
 })
 export class FacilitiesComponent implements OnInit {
+
   facilities$!: Observable<Facility[]>;
   filteredFacilities$!: Observable<Facility[]>;
 
@@ -24,7 +26,8 @@ export class FacilitiesComponent implements OnInit {
     maxRating: 5
   };
 
-  constructor(private facilityService: FacilityService) {}
+  // Inject Router into the component
+  constructor(private facilityService: FacilityService, private router: Router) {}
 
   ngOnInit(): void {
     this.facilities$ = this.facilityService.getFacilities();
@@ -45,13 +48,19 @@ export class FacilitiesComponent implements OnInit {
       )
     );
   }
+
   deleteFacility(id: number): void {
     this.facilityService.deleteFacility(id).subscribe(() => {
       // Refresh the list after deletion
       this.applyFilters();
     });
   }
+
+  navigateToCreateFacility(): void {
+    this.router.navigate(['/create-facility']);  // Programmatically navigate
+  }
 }
+
 
 
 
