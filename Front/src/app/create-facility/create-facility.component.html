@@ -1,1 +1,25 @@
-<p>create-facility works!</p>
+<form [formGroup]="facilityForm" (ngSubmit)="createFacility()" class="container mt-4">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" class="form-control" />
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input id="description" formControlName="description" class="form-control" />
+    </div>
+  
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input id="address" formControlName="address" class="form-control" />
+    </div>
+  
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input id="city" formControlName="city" class="form-control" />
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="facilityForm.invalid">Create Facility</button>
+  </form>
+  
+  
