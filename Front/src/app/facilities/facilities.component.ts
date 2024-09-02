@@ -45,6 +45,12 @@ export class FacilitiesComponent implements OnInit {
       )
     );
   }
+  deleteFacility(id: number): void {
+    this.facilityService.deleteFacility(id).subscribe(() => {
+      // Refresh the list after deletion
+      this.applyFilters();
+    });
+  }
 }
 
 
