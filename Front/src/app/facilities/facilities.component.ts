@@ -61,8 +61,12 @@ export class FacilitiesComponent implements OnInit {
   }
 
   navigateToEditFacility(id: number): void {
-    this.router.navigate(['/edit-facility', id]);  // Navigate to the edit facility page with the facility ID
+    this.router.navigate(['/edit-facility/', id]);  // Navigate to the edit facility page with the facility ID
   }
+  navigateToDetails(id: number): void {
+    this.router.navigate(['/facilities', id]);
+  }
+  
   
 }
 

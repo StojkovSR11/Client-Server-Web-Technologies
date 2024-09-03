@@ -29,13 +29,13 @@ public class Exercise {
     @JsonIgnore // Prevent serialization of facility
     private Facility facility;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "discipline_id", nullable = true)
     @JsonIgnore // Prevent serialization of discipline
     private Discipline discipline;
 
-    @OneToMany(mappedBy = "exercise")
-    @JsonIgnore // Prevent serialization of images
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Image> images;
 
     // Getters and Setters

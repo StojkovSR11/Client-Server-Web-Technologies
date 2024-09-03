@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <h2>{{ facility?.name }}</h2>
+    <p><strong>Description:</strong> {{ facility?.description }}</p>
+    <p><strong>Address:</strong> {{ facility?.address }}</p>
+    <p><strong>City:</strong> {{ facility?.city }}</p>
+    <p><strong>Total Rating:</strong> {{ facility?.totalRating }}</p>
+    <p><strong>Created At:</strong> {{ facility?.createdAt | date }}</p>
+  
+    <h4>Work Days</h4>
+    <ul>
+      <li *ngFor="let workDay of facility?.workDays">
+        {{ workDay.day }}: {{ workDay.fromTime }} - {{ workDay.untilTime }}
+      </li>
+    </ul>
+  
+    <h4>Disciplines</h4>
+    <ul>
+      <li *ngFor="let discipline of facility?.disciplines">
+        {{ discipline.name }}
+      </li>
+    </ul>
+  
+    <h4>Reviews</h4>
+    <div *ngFor="let review of facility?.reviews" class="mb-4">
+      <p><strong>Created At:</strong> {{ review.createdAt | date }}</p>
+      <p><strong>Exercise Count:</strong> {{ review.exerciseCount }}</p>
+      <p><strong>Hidden:</strong> {{ review.hidden ? 'Yes' : 'No' }}</p>
+      <p><strong>Ratings:</strong></p>
+      <ul>
+        <li><strong>Equipment:</strong> {{ review.rate.equipment }}</li>
+        <li><strong>Staff:</strong> {{ review.rate.staff }}</li>
+        <li><strong>Hygiene:</strong> {{ review.rate.hygiene }}</li>
+        <li><strong>Space:</strong> {{ review.rate.space }}</li>
+      </ul>
+    </div>
+  
+    <button (click)="goBack()" class="btn btn-secondary">Back to Facilities</button>
+  </div>
+  
+  
