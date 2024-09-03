@@ -19,7 +19,38 @@
       <input id="city" formControlName="city" class="form-control" />
     </div>
   
+    <div formArrayName="disciplines">
+      <div *ngFor="let discipline of disciplines.controls; let i = index" [formGroupName]="i" class="form-group">
+        <label for="disciplineName">Discipline Name:</label>
+        <input id="disciplineName" formControlName="name" class="form-control" />
+        <button type="button" (click)="removeDiscipline(i)" class="btn btn-danger mt-2">Remove</button>
+      </div>
+      <button type="button" (click)="addDiscipline()" class="btn btn-secondary mt-2">Add Discipline</button>
+    </div>
+  
+    <div formArrayName="workDays">
+      <div *ngFor="let workDay of workDays.controls; let i = index" [formGroupName]="i" class="form-group">
+        <label for="day">Day:</label>
+        <select id="day" formControlName="day" class="form-control">
+          <option value="MONDAY">Monday</option>
+          <option value="TUESDAY">Tuesday</option>
+          <option value="WEDNESDAY">Wednesday</option>
+          <option value="THURSDAY">Thursday</option>
+          <option value="FRIDAY">Friday</option>
+          <option value="SATURDAY">Saturday</option>
+          <option value="SUNDAY">Sunday</option>
+        </select>
+        <label for="fromTime">From Time:</label>
+        <input id="fromTime" type="time" formControlName="fromTime" class="form-control" />
+        <label for="untilTime">Until Time:</label>
+        <input id="untilTime" type="time" formControlName="untilTime" class="form-control" />
+        <button type="button" (click)="removeWorkDay(i)" class="btn btn-danger mt-2">Remove</button>
+      </div>
+      <button type="button" (click)="addWorkDay()" class="btn btn-secondary mt-2">Add Work Day</button>
+    </div>
+  
     <button type="submit" class="btn btn-primary" [disabled]="facilityForm.invalid">Create Facility</button>
   </form>
+  
   
   

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Facility } from './facility.model';  // Correct path
+import { Facility,Discipline,WorkDay } from './facility.model';  // Correct path
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,7 @@ export class FacilityService {
   deleteFacility(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
 }
 
 

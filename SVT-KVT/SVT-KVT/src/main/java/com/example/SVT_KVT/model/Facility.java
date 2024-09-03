@@ -1,7 +1,9 @@
 package com.example.SVT_KVT.model;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,9 +17,8 @@ public class Facility {
 
     private String description;
 
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date createdAt;
+    private LocalDate createdAt;
 
     private String address;
     private String city;
@@ -27,22 +28,13 @@ public class Facility {
     private Boolean active;
 
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkDay> workDays;
+    private List<WorkDay> workDays = new ArrayList<>();
 
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Discipline> disciplines;
-    
+    private List<Discipline> disciplines = new ArrayList<>();
+
     // Getters and Setters
-
-    public List<Discipline> getDisciplines() {
-		return disciplines;
-	}
-
-	public void setDisciplines(List<Discipline> disciplines) {
-		disciplines = disciplines;
-	}
-
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -66,11 +58,11 @@ public class Facility {
         this.description = description;
     }
 
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -112,6 +104,24 @@ public class Facility {
 
     public void setWorkDays(List<WorkDay> workDays) {
         this.workDays = workDays;
+    }
+
+    public List<Discipline> getDisciplines() {
+        return disciplines;
+    }
+
+    public void setDisciplines(List<Discipline> disciplines) {
+        this.disciplines = disciplines;
+    }
+    
+    public void addWorkDay(WorkDay workDay) {
+        workDay.setFacility(this);
+        this.workDays.add(workDay);
+    }
+
+    public void addDiscipline(Discipline discipline) {
+        discipline.setFacility(this);
+        this.disciplines.add(discipline);
     }
 }
 
