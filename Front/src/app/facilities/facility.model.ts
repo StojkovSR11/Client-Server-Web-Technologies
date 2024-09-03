@@ -1,3 +1,19 @@
+export interface Rate {
+  id: number;
+  equipment: number;
+  staff: number;
+  hygiene: number;
+  space: number;
+}
+
+export interface Review {
+  id: number;
+  createdAt: string; // Adjusted to string for date formatting
+  exerciseCount: number;
+  hidden: boolean;
+  rate: Rate; // Nested Rate interface
+}
+
 export interface WorkDay {
   id: number;
   validFrom: string; // Adjusted to string for date formatting
@@ -22,7 +38,9 @@ export interface Facility {
   active: boolean;
   workDays: WorkDay[]; // Array of WorkDay
   disciplines: Discipline[]; // Array of Discipline
+  reviews: Review[]; // Array of Review
 }
+
 
 
 
