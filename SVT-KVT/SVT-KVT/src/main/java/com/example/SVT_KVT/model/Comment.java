@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Comment {
@@ -19,14 +21,17 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "facility_id", nullable = false)
+    @JsonIgnore
     private Facility facility;
 
     @ManyToOne
     @JoinColumn(name = "parent_comment_id", nullable = true)
+    @JsonIgnore
     private Comment parentComment;
 
 	public Integer getId() {

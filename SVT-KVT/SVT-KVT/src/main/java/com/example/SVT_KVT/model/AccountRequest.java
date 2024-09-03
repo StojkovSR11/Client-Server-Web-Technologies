@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class AccountRequest {
     @Id
@@ -20,10 +22,12 @@ public class AccountRequest {
 
     @ManyToOne
     @JoinColumn(name = "status", nullable = true)
+    @JsonIgnore
     private RequestStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
+    @JsonIgnore
     private User user;
 
 	public Integer getId() {

@@ -1,7 +1,5 @@
 package com.example.SVT_KVT.model;
-
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +30,9 @@ public class Facility {
 
     @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Discipline> disciplines = new ArrayList<>();
+
+    @OneToMany(mappedBy = "facility")
+    private List<Review> reviews = new ArrayList<>();
 
     // Getters and Setters
     public Integer getId() {
@@ -113,7 +114,15 @@ public class Facility {
     public void setDisciplines(List<Discipline> disciplines) {
         this.disciplines = disciplines;
     }
-    
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     public void addWorkDay(WorkDay workDay) {
         workDay.setFacility(this);
         this.workDays.add(workDay);
@@ -123,5 +132,27 @@ public class Facility {
         discipline.setFacility(this);
         this.disciplines.add(discipline);
     }
+    
+    public void calculateTotalRating() {
+        if (reviews.isEmpty()) {
+            this.totalRating = 0.0;
+            return;
+        }
+
+        double totalRatingSum = 0.0;
+        int count = 0;
+
+        for (Review review : reviews) {
+            Rate rate = review.getRate();
+            if (rate != null) {
+                double averageRating = (rate.getEquipment() + rate.getStaff() + rate.getHygiene() + rate.getSpace()) / 4.0;
+                totalRatingSum += averageRating;
+                count++;
+            }
+        }
+
+        this.totalRating = count > 0 ? totalRatingSum / count : 0.0;
+    }
 }
+
 

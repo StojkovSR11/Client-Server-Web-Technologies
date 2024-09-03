@@ -1,9 +1,8 @@
 package com.example.SVT_KVT.model;
 
-import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Date;
-import java.util.List;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Rate {
@@ -23,13 +22,12 @@ public class Rate {
     @Column(nullable = false)
     private Integer space;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "review_id", nullable = false)
-    @JsonIgnore // Prevent serialization of review to avoid circular references
+    @JsonIgnore
     private Review review;
 
     // Getters and Setters
-    
     public Integer getId() {
         return id;
     }
@@ -78,4 +76,6 @@ public class Rate {
         this.review = review;
     }
 }
+
+
 
