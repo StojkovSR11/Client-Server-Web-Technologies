@@ -71,12 +71,24 @@ public class FacilityController {
     @PutMapping("/{id}")
     public ResponseEntity<Facility> updateFacility(@PathVariable Integer id,
                                                    @RequestBody Facility facility) {
-        if (!facilityService.findById(id).isPresent()) {
-            return ResponseEntity.notFound().build();
+    	
+        // Set facility reference in workDays and disciplines
+        for (WorkDay workDay : facility.getWorkDays()) {
+            workDay.setFacility(facility);
+            workDay.setValidFrom(LocalDate.now()); 
+
         }
-        facility.setId(id); // Assuming there's a setId method
-        Facility updatedFacility = facilityService.save(facility);
-        return new ResponseEntity<>(updatedFacility, HttpStatus.OK);
+        for (Discipline discipline : facility.getDisciplines()) {
+        	discipline.setFacility(facility);
+        }
+        
+        return facilityService.findById(id)
+                .map(existingFacility -> {
+                    facility.setId(id); // Ensure the ID from the path is used
+                    Facility updatedFacility = facilityService.save(facility);
+                    return new ResponseEntity<>(updatedFacility, HttpStatus.OK);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
