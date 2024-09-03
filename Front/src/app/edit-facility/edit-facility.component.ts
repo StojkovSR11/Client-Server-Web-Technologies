@@ -52,14 +52,16 @@ export class EditFacilityComponent implements OnInit {
 
   setDisciplines(disciplines: Discipline[]): void {
     const disciplineFGs = disciplines.map(discipline => this.fb.group({
+      id: [discipline.id],  // Ensure id is included
       name: [discipline.name, Validators.required]
     }));
     const disciplineFormArray = this.fb.array(disciplineFGs);
     this.facilityForm.setControl('disciplines', disciplineFormArray);
   }
-
+  
   setWorkDays(workDays: WorkDay[]): void {
     const workDayFGs = workDays.map(workDay => this.fb.group({
+      id: [workDay.id],  // Ensure id is included
       day: [workDay.day, Validators.required],
       fromTime: [workDay.fromTime, Validators.required],
       untilTime: [workDay.untilTime, Validators.required]
@@ -67,6 +69,7 @@ export class EditFacilityComponent implements OnInit {
     const workDayFormArray = this.fb.array(workDayFGs);
     this.facilityForm.setControl('workDays', workDayFormArray);
   }
+  
 
   addDiscipline(): void {
     this.disciplines.push(this.fb.group({
@@ -98,12 +101,13 @@ export class EditFacilityComponent implements OnInit {
           ...this.facilityForm.value,
           active: existingFacility.active !== undefined ? existingFacility.active : true
         };
-
+  
         this.facilityService.updateFacility(this.facilityId, updatedFacility).subscribe(() => {
-          this.router.navigate(['/']);  
+          this.router.navigate(['/']);
         });
       });
     }
   }
+  
 }
 

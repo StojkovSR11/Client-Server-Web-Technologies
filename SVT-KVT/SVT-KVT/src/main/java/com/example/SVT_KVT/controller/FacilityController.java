@@ -70,26 +70,25 @@ public class FacilityController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Facility> updateFacility(@PathVariable Integer id,
-                                                   @RequestBody Facility facility) {
-    	
-        // Set facility reference in workDays and disciplines
-        for (WorkDay workDay : facility.getWorkDays()) {
-            workDay.setFacility(facility);
-            workDay.setValidFrom(LocalDate.now()); 
-
-        }
-        for (Discipline discipline : facility.getDisciplines()) {
-        	discipline.setFacility(facility);
-        }
-        
-        return facilityService.findById(id)
-                .map(existingFacility -> {
-                    facility.setId(id); // Ensure the ID from the path is used
-                    Facility updatedFacility = facilityService.save(facility);
-                    return new ResponseEntity<>(updatedFacility, HttpStatus.OK);
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                                                    @RequestBody Facility facility) {
+      // Set facility reference in workDays and disciplines
+      for (WorkDay workDay : facility.getWorkDays()) {
+        workDay.setFacility(facility);
+        workDay.setValidFrom(LocalDate.now()); 
+      }
+      for (Discipline discipline : facility.getDisciplines()) {
+        discipline.setFacility(facility);
+      }
+      
+      return facilityService.findById(id)
+        .map(existingFacility -> {
+          facility.setId(id); // Ensure the ID from the path is used
+          Facility updatedFacility = facilityService.save(facility);
+          return new ResponseEntity<>(updatedFacility, HttpStatus.OK);
+        })
+        .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFacility(@PathVariable Integer id) {
