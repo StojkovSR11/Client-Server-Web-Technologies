@@ -79,6 +79,10 @@ export class CreateFacilityComponent {
       });
     }
   }
+
+  goBack(): void {
+    this.router.navigate(['/facilities']);
+  }
 }
 
 

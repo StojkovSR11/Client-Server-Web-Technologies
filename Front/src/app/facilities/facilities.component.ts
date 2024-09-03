@@ -49,6 +49,16 @@ export class FacilitiesComponent implements OnInit {
     );
   }
 
+  cancelFilters(): void {
+    this.filters = {
+      city: '',
+      discipline: '',
+      minRating: 0,
+      maxRating: 5
+    };
+    this.filteredFacilities$ = this.facilities$;
+  }
+
   deleteFacility(id: number): void {
     this.facilityService.deleteFacility(id).subscribe(() => {
       // Refresh the list after deletion
@@ -57,27 +67,14 @@ export class FacilitiesComponent implements OnInit {
   }
 
   navigateToCreateFacility(): void {
-    this.router.navigate(['/create-facility']);  // Programmatically navigate
+    this.router.navigate(['/facilities/create-facility']);  // Programmatically navigate
   }
 
   navigateToEditFacility(id: number): void {
     this.router.navigate(['/edit-facility/', id]);  // Navigate to the edit facility page with the facility ID
   }
+  
   navigateToDetails(id: number): void {
     this.router.navigate(['/facilities', id]);
   }
-  
-  
 }
-
-
-
-
-
-
-
-
-
-
-
-

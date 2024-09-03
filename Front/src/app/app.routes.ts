@@ -8,7 +8,7 @@ import { FacilityDetailsComponent } from './facility-details/facility-details.co
 export const routes: Routes = [
   { path: '', redirectTo: '/facilities', pathMatch: 'full' }, // Redirect to default path
   { path: 'facilities', component: FacilitiesComponent },
-  { path: 'facilities/create', component: CreateFacilityComponent },
+  { path: 'facilities/create-facility', component: CreateFacilityComponent },
   { path: 'edit-facility/:id', component: EditFacilityComponent },
   { path: 'facilities/:id', component: FacilityDetailsComponent }, // Add route for FacilityDetailsComponent
 
