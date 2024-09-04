@@ -3,6 +3,9 @@ import { ReviewService } from './review.service';  // Ensure correct path
 import { Review } from '../facilities/facility.model';  // Import the Review interface
 import { ActivatedRoute } from '@angular/router';  // Import ActivatedRoute for accessing URL parameters
 import { FormsModule } from '@angular/forms';  // Import FormsModule
+import { Router } from '@angular/router';  // Import Router for navigation
+
+
 
 @Component({
   selector: 'app-create-review',
@@ -28,7 +31,7 @@ export class CreateReviewComponent implements OnInit {
     facilityId: 0  // This will be set from the URL parameter
   };
 
-  constructor(private reviewService: ReviewService, private route: ActivatedRoute) {}
+  constructor(private reviewService: ReviewService, private route: ActivatedRoute,private router: Router) {}
 
   ngOnInit() {
     // Get facilityId from the URL
@@ -50,7 +53,9 @@ export class CreateReviewComponent implements OnInit {
 
   onSubmit() {
     this.createReview();  // Call the createReview method when the form is submitted
+    this.router.navigate(['/']);  // Use this.router to navigate
   }
+  
 }
 
 

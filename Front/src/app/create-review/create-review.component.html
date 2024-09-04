@@ -3,30 +3,29 @@
     <form (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="exerciseCount">Exercise Count</label>
-        <input type="number" id="exerciseCount" [(ngModel)]="review.exerciseCount" name="exerciseCount" class="form-control">
+        <input type="number" id="exerciseCount" [(ngModel)]="review.exerciseCount" name="exerciseCount" class="form-control" min="1" max="5">
       </div>
       <div class="form-group">
         <label for="equipment">Equipment Rating</label>
-        <input type="number" id="equipment" [(ngModel)]="review.rate.equipment" name="equipment" class="form-control">
+        <input type="number" id="equipment" [(ngModel)]="review.rate.equipment" name="equipment" class="form-control" min="1" max="5">
       </div>
       <div class="form-group">
         <label for="staff">Staff Rating</label>
-        <input type="number" id="staff" [(ngModel)]="review.rate.staff" name="staff" class="form-control">
+        <input type="number" id="staff" [(ngModel)]="review.rate.staff" name="staff" class="form-control" min="1" max="5">
       </div>
       <div class="form-group">
         <label for="hygiene">Hygiene Rating</label>
-        <input type="number" id="hygiene" [(ngModel)]="review.rate.hygiene" name="hygiene" class="form-control">
+        <input type="number" id="hygiene" [(ngModel)]="review.rate.hygiene" name="hygiene" class="form-control" min="1" max="5">
       </div>
       <div class="form-group">
         <label for="space">Space Rating</label>
-        <input type="number" id="space" [(ngModel)]="review.rate.space" name="space" class="form-control">
+        <input type="number" id="space" [(ngModel)]="review.rate.space" name="space" class="form-control" min="1" max="5">
       </div>
-      <div class="form-group">
-        <label for="hidden">Hidden</label>
-        <input type="checkbox" id="hidden" [(ngModel)]="review.hidden" name="hidden">
-      </div>
+  
+      <input type="hidden" id="hidden" [(ngModel)]="review.hidden" name="hidden">
       <input type="hidden" [(ngModel)]="review.userId" name="userId">
       <input type="hidden" [(ngModel)]="review.facilityId" name="facilityId">
       <button type="submit" class="btn btn-success">Submit Review</button>
     </form>
   </div>
+  

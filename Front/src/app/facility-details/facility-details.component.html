@@ -23,8 +23,7 @@
     <h4>Reviews</h4>
     <div *ngFor="let review of facility?.reviews" class="mb-4">
       <p><strong>Created At:</strong> {{ review.createdAt | date }}</p>
-      <p><strong>Exercise Count:</strong> {{ review.exerciseCount }}</p>
-      <p><strong>Hidden:</strong> {{ review.hidden ? 'Yes' : 'No' }}</p>
+      
       <p><strong>Ratings:</strong></p>
       <ul>
         <li><strong>Equipment:</strong> {{ review.rate.equipment }}</li>
