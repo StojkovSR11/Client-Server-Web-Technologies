@@ -35,5 +35,14 @@ export class ExerciseComponent implements OnInit {
   clearSelection(): void {
     this.selectedExercise = null;
   }
-}
 
+  deleteExercise(id: number, event: MouseEvent): void {
+    event.stopPropagation(); // Prevent the event from triggering viewExercise
+    if (confirm('Are you sure you want to delete this exercise?')) {
+      this.exerciseService.deleteExercise(id).subscribe(() => {
+        this.exercises = this.exercises.filter(exercise => exercise.id !== id);
+        this.clearSelection();
+      });
+    }
+  }
+}
