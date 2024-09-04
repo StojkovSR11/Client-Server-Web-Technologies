@@ -29,6 +29,12 @@
         <p class="card-text"><strong>Address:</strong> {{ facility.address }}</p>
         <p class="card-text"><strong>City:</strong> {{ facility.city }}</p>
         <p class="card-text"><strong>Total Rating:</strong> {{ facility.totalRating }}</p>
+        <h4>Disciplines</h4>
+        <ul>
+          <li *ngFor="let discipline of facility?.disciplines">
+            {{ discipline.name }}
+          </li>
+        </ul>
         
         <!-- View Details Button -->
         <button (click)="navigateToDetails(facility.id)" class="btn btn-info mt-3">Details</button>

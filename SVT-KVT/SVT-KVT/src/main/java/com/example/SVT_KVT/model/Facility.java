@@ -151,7 +151,7 @@ public class Facility {
             }
         }
 
-        this.totalRating = count > 0 ? totalRatingSum / count : 0.0;
+        this.totalRating = count > 0 ? Math.round((totalRatingSum / count) * 10.0) / 10.0 : 0.0;
     }
 }
 
