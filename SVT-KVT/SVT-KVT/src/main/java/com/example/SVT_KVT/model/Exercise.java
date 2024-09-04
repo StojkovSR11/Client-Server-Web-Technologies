@@ -1,12 +1,10 @@
 package com.example.SVT_KVT.model;
-
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -16,7 +14,7 @@ public class Exercise {
     private Integer id;
 
     @Column(nullable = true)
-    private LocalDateTime date;
+    private LocalDate date;  // Changed from LocalDateTime to LocalDate
 
     @Column(nullable = false)
     private LocalTime fromTime;
@@ -28,7 +26,7 @@ public class Exercise {
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
     private User user;
-    
+
     @JsonProperty("userId")
     public Integer getUserId() {
         return user != null ? user.getId() : null;
@@ -80,7 +78,7 @@ public class Exercise {
     private List<Image> images;
 
     // Getters and Setters
-    
+
     public Integer getId() {
         return id;
     }
@@ -105,11 +103,11 @@ public class Exercise {
         this.untilTime = untilTime;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {  // Changed return type to LocalDate
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {  // Changed parameter type to LocalDate
         this.date = date;
     }
 
@@ -143,16 +141,6 @@ public class Exercise {
 
     public void setImages(List<Image> images) {
         this.images = images;
-    }
-
-    // Method to return formatted date for JSON serialization
-    @JsonProperty("date")
-    public String getFormattedDate() {
-        if (date != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            return date.toLocalDate().format(formatter);
-        }
-        return null;
     }
 }
 

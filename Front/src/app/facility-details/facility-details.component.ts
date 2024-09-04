@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FacilityService } from '../facilities/facility.service';
 import { Facility } from '../facilities/facility.model';
-import { DatePipe } from '@angular/common'; // Import DatePipe
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-facility-details',
   templateUrl: './facility-details.component.html',
   styleUrls: ['./facility-details.component.css'],
   standalone: true,
-  imports: [CommonModule], // Import CommonModule for pipes
-  providers: [DatePipe] // Provide DatePipe here
+  imports: [CommonModule],
+  providers: [DatePipe]
 })
 export class FacilityDetailsComponent implements OnInit {
   facility: Facility | undefined;
@@ -20,7 +20,7 @@ export class FacilityDetailsComponent implements OnInit {
     private facilityService: FacilityService,
     private route: ActivatedRoute,
     private router: Router,
-    private datePipe: DatePipe // Inject DatePipe here
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -37,8 +37,13 @@ export class FacilityDetailsComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/facilities']);
   }
+
   addReview(): void {
     this.router.navigate([`/facilities/${this.facility?.id}/add-review`]);
   }
-  
+
+  createExerciseForDiscipline(disciplineId: number): void {
+    this.router.navigate([`/facilities/${this.facility?.id}/add-exercise`, { disciplineId }]);
+  }
 }
+

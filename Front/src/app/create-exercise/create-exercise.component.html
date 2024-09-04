@@ -1,0 +1,22 @@
+<div class="container mt-4">
+    <h2>Create New Exercise</h2>
+    <form #form="ngForm" (ngSubmit)="createExercise(form)">
+      <div class="form-group">
+        <label for="fromTime">From Time</label>
+        <input type="time" id="fromTime" name="fromTime" class="form-control" [(ngModel)]="exercise.fromTime" required>
+      </div>
+      <div class="form-group">
+        <label for="untilTime">Until Time</label>
+        <input type="time" id="untilTime" name="untilTime" class="form-control" [(ngModel)]="exercise.untilTime" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" class="form-control" [(ngModel)]="exercise.date" required>
+      </div>
+      <!-- Add more fields as necessary -->
+  
+      <button type="submit" class="btn btn-success">Create Exercise</button>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
+    </form>
+  </div>
+  
