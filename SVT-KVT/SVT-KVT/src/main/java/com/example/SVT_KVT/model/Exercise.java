@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -14,20 +15,21 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = true)
+    private LocalDateTime date;
 
     @Column(nullable = false)
     private LocalTime fromTime;
-
 
     @Column(nullable = false)
     private LocalTime untilTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore // Prevent serialization of user to avoid circular references
+    @JsonIgnore
     private User user;
     
-    @JsonProperty("userId") // Serialize userId instead of the full User object
+    @JsonProperty("userId")
     public Integer getUserId() {
         return user != null ? user.getId() : null;
     }
@@ -41,13 +43,37 @@ public class Exercise {
 
     @ManyToOne
     @JoinColumn(name = "facility_id", nullable = false)
-    @JsonIgnore // Prevent serialization of facility
+    @JsonIgnore
     private Facility facility;
+
+    @JsonProperty("facilityId")
+    public Integer getFacilityId() {
+        return facility != null ? facility.getId() : null;
+    }
+
+    public void setFacilityId(Integer facilityId) {
+        if (this.facility == null) {
+            this.facility = new Facility();
+        }
+        this.facility.setId(facilityId);
+    }
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "discipline_id", nullable = true)
-    @JsonIgnore // Prevent serialization of discipline
+    @JsonIgnore
     private Discipline discipline;
+
+    @JsonProperty("disciplineId")
+    public Integer getDisciplineId() {
+        return discipline != null ? discipline.getId() : null;
+    }
+
+    public void setDisciplineId(Integer disciplineId) {
+        if (this.discipline == null) {
+            this.discipline = new Discipline();
+        }
+        this.discipline.setId(disciplineId);
+    }
 
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -77,6 +103,14 @@ public class Exercise {
 
     public void setUntilTime(LocalTime untilTime) {
         this.untilTime = untilTime;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public User getUser() {
@@ -110,5 +144,16 @@ public class Exercise {
     public void setImages(List<Image> images) {
         this.images = images;
     }
+
+    // Method to return formatted date for JSON serialization
+    @JsonProperty("date")
+    public String getFormattedDate() {
+        if (date != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return date.toLocalDate().format(formatter);
+        }
+        return null;
+    }
 }
+
 

@@ -5,7 +5,7 @@ import { CreateFacilityComponent } from './create-facility/create-facility.compo
 import { EditFacilityComponent } from './edit-facility/edit-facility.component';
 import { FacilityDetailsComponent } from './facility-details/facility-details.component'; // Import the new component
 import { CreateReviewComponent } from './create-review/create-review.component';
-
+import { ExerciseComponent } from './exercise/exercise.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/facilities', pathMatch: 'full' }, // Redirect to default path
@@ -14,6 +14,7 @@ export const routes: Routes = [
   { path: 'edit-facility/:id', component: EditFacilityComponent },
   { path: 'facilities/:id', component: FacilityDetailsComponent }, // Add route for FacilityDetailsComponent
   { path: 'facilities/:id/add-review', component: CreateReviewComponent },
+  { path: 'exercises', component: ExerciseComponent },
 
   // Add other routes here as needed
   { path: '**', redirectTo: '/facilities' } // Wildcard route for a 404 page or redirect

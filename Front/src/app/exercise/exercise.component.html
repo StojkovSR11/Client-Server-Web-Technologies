@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Exercises</h2>
+  
+    <ul class="list-group">
+      <li *ngFor="let exercise of exercises" 
+          class="list-group-item d-flex justify-content-between align-items-center"
+          (click)="viewExercise(exercise)"
+          style="cursor: pointer;">
+        <span>{{ exercise.fromTime }} - {{ exercise.untilTime }}</span>
+        <span class="badge bg-primary">Facility ID: {{ exercise.facilityId }}</span>
+      </li>
+    </ul>
+  
+    <div *ngIf="selectedExercise" class="mt-4 p-3 border rounded bg-light">
+      <h3 class="mb-3">Selected Exercise</h3>
+      <p><strong>Date:</strong> {{ selectedExercise.date }}</p>
+      <p><strong>From Time:</strong> {{ selectedExercise.fromTime }}</p>
+      <p><strong>Until Time:</strong> {{ selectedExercise.untilTime }}</p>
+      <p><strong>User ID:</strong> {{ selectedExercise.userId }}</p>
+      <p><strong>Facility ID:</strong> {{ selectedExercise.facilityId }}</p>
+      <p *ngIf="selectedExercise.disciplineId"><strong>Discipline ID:</strong> {{ selectedExercise.disciplineId }}</p>
+      <button class="btn btn-secondary" (click)="clearSelection()">Clear Selection</button>
+    </div>
+</div>
+
+  

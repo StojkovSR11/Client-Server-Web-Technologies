@@ -43,6 +43,15 @@ export interface Facility {
   reviews: Review[]; // Array of Review
 }
 
+export interface Exercise {
+  id: number;
+  fromTime: string;   // Using string to represent LocalTime in ISO 8601 format
+  untilTime: string;  // Using string to represent LocalTime in ISO 8601 format
+  userId: number;     // Serialized userId instead of the full User object
+  facilityId: number; // Assuming you'll include the facility ID in the frontend model
+  disciplineId?: number; // Optional discipline ID
+  date: string;
+}
 
 
 
