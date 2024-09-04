@@ -6,7 +6,7 @@
           class="list-group-item d-flex justify-content-between align-items-center"
           (click)="viewExercise(exercise)"
           style="cursor: pointer;">
-        <span>{{ exercise.fromTime }} - {{ exercise.untilTime }}</span>
+          <span>{{ exercise.date | date: 'yyyy-MM-dd' }} - {{ exercise.fromTime }} - {{ exercise.untilTime }}</span>
         <span class="badge bg-primary">Facility ID: {{ exercise.facilityId }}</span>
       </li>
     </ul>
