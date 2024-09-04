@@ -12,6 +12,8 @@ export interface Review {
   exerciseCount: number;
   hidden: boolean;
   rate: Rate; // Nested Rate interface
+  userId: number;
+  facilityId: number;
 }
 
 export interface WorkDay {

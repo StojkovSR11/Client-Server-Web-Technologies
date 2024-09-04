@@ -37,4 +37,8 @@ export class FacilityDetailsComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/facilities']);
   }
+  addReview(): void {
+    this.router.navigate([`/facilities/${this.facility?.id}/add-review`]);
+  }
+  
 }

@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';  // Import FormsModule
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],  // Include CommonModule
+  imports: [CommonModule, RouterOutlet, FormsModule],  // Include CommonModule
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

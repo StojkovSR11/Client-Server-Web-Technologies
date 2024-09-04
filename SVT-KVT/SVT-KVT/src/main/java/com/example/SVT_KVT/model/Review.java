@@ -13,10 +13,10 @@ public class Review {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     @Column(nullable = false)
-    private Integer exerciseCount;
+    private Integer exerciseCount = 0;
 
     @Column(nullable = false)
     private Boolean hidden;
@@ -89,6 +89,17 @@ public class Review {
 
     public void setRate(Rate rate) {
         this.rate = rate;
+        if (rate != null) {
+            rate.setReview(this);  // Ensure the bidirectional relationship is maintained
+        }
+    }
+    
+    public void addRate(Rate rate) {
+        if (rate != null) {
+            rate.setReview(this);
+            this.rate = rate;
+        }
     }
 }
+
 
