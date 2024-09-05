@@ -79,3 +79,15 @@
         max-width: 100%;
     }
 }
+/* Label Styling */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+/* Optional: Add margin to inputs */
+.col-md-3 {
+    margin-bottom: 1rem;
+}

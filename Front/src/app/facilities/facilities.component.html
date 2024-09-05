@@ -2,16 +2,20 @@
 <form (ngSubmit)="applyFilters()">
   <div class="row mb-4">
     <div class="col-md-3">
-      <input type="text" class="form-control" [(ngModel)]="filters.city" name="city" placeholder="City">
+      <label for="city">City</label>
+      <input type="text" class="form-control" [(ngModel)]="filters.city" name="city" placeholder="Enter city">
     </div>
     <div class="col-md-3">
-      <input type="text" class="form-control" [(ngModel)]="filters.discipline" name="discipline" placeholder="Discipline">
+      <label for="discipline">Discipline</label>
+      <input type="text" class="form-control" [(ngModel)]="filters.discipline" name="discipline" placeholder="Enter discipline">
     </div>
     <div class="col-md-3">
-      <input type="number" class="form-control" [(ngModel)]="filters.minRating" step="0.1" name="minRating" placeholder="Min Rating">
+      <label for="minRating">Min Rating</label>
+      <input type="number" class="form-control" [(ngModel)]="filters.minRating" step="0.1" name="minRating" placeholder="Min Rating" min="0" max="10">
     </div>
     <div class="col-md-3">
-      <input type="number" class="form-control" [(ngModel)]="filters.maxRating" step="0.1" name="maxRating" placeholder="Max Rating">
+      <label for="maxRating">Max Rating</label>
+      <input type="number" class="form-control" [(ngModel)]="filters.maxRating" step="0.1" name="maxRating" placeholder="Max Rating" min="0" max="10">
     </div>
   </div>
   <div class="d-flex justify-content-between">
@@ -20,6 +24,7 @@
     <button (click)="navigateToCreateFacility()" class="btn btn-success">Create New Facility</button>
   </div>
 </form>
+
 
 <div class="row">
   <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let facility of filteredFacilities$ | async">
