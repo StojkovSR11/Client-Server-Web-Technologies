@@ -1,0 +1,56 @@
+/* Base styles for the body */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #007bff, #00c6ff); /* Gradient background */
+    color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.header-nav a:hover {
+    color: #ffeb3b; /* Highlight color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 767.98px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
