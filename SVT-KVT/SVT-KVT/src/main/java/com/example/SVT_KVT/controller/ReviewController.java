@@ -42,21 +42,35 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestParam Integer userId, 
-                                               @RequestParam Integer facilityId, 
-                                               @RequestBody Review review) {
+    public ResponseEntity<?> createReview(@RequestParam Integer userId, 
+                                          @RequestParam Integer facilityId, 
+                                          @RequestBody Review review) {
         Optional<User> user = userService.findById(userId);
         Optional<Facility> facility = facilityService.findById(facilityId);
 
+        // Validate user and facility existence
         if (!user.isPresent() || !facility.isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user or facility ID");
         }
 
+        // Validate rating values
+        if (review.getRate().getEquipment() < 1 || review.getRate().getEquipment() > 10 ||
+            review.getRate().getStaff() < 1 || review.getRate().getStaff() > 10 ||
+            review.getRate().getHygiene() < 1 || review.getRate().getHygiene() > 10 ||
+            review.getRate().getSpace() < 1 || review.getRate().getSpace() > 10) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ratings must be between 1 and 10.");
+        }
+
+        // Set user and facility, then save the review
         review.setUser(user.get());
         review.setFacility(facility.get());
         Review savedReview = reviewService.save(review);
+
+        // Return the created review in the response
         return new ResponseEntity<>(savedReview, HttpStatus.CREATED);
     }
+
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable Integer id,

@@ -4,21 +4,20 @@ import { Review } from '../facilities/facility.model';  // Import the Review int
 import { ActivatedRoute } from '@angular/router';  // Import ActivatedRoute for accessing URL parameters
 import { FormsModule } from '@angular/forms';  // Import FormsModule
 import { Router } from '@angular/router';  // Import Router for navigation
-
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-review',
   templateUrl: './create-review.component.html',
   styleUrls: ['./create-review.component.css'],
   standalone: true,  // Mark as standalone
-  imports: [FormsModule]  // Include FormsModule here
+  imports: [FormsModule,CommonModule]  // Include FormsModule here
 })
 export class CreateReviewComponent implements OnInit {
   review: Review = {
     id: 0,
-    createdAt: new Date().toISOString(),  // Set current date-time
-    exerciseCount: 0,  // Default to 0
+    createdAt: new Date().toISOString(),
+    exerciseCount: 1,
     hidden: false,
     rate: {
       id: 0,
@@ -27,16 +26,17 @@ export class CreateReviewComponent implements OnInit {
       hygiene: 0,
       space: 0
     },
-    userId: 1,  // Assuming userId is 1 for simplicity; replace with actual user ID logic
-    facilityId: 0  // This will be set from the URL parameter
+    userId: 1,
+    facilityId: 0
   };
 
-  constructor(private reviewService: ReviewService, private route: ActivatedRoute,private router: Router) {}
+  errorMessage: string = '';
+
+  constructor(private reviewService: ReviewService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    // Get facilityId from the URL
     this.route.params.subscribe(params => {
-      this.review.facilityId = +params['id'];  // Assuming the route has a parameter named 'facilityId'
+      this.review.facilityId = +params['id'];
     });
   }
 
@@ -44,20 +44,16 @@ export class CreateReviewComponent implements OnInit {
     this.reviewService.createReview(this.review.userId, this.review.facilityId, this.review).subscribe(
       response => {
         console.log('Review created:', response);
+        this.router.navigate(['/']);  // Navigate on success
       },
       error => {
         console.error('Error creating review:', error);
+        this.errorMessage = 'There was an error creating the review. Please try again.';
       }
     );
   }
 
   onSubmit() {
-    this.createReview();  // Call the createReview method when the form is submitted
-    this.router.navigate(['/']);  // Use this.router to navigate
+    this.createReview();
   }
-  
 }
-
-
-
-
