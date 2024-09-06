@@ -23,7 +23,7 @@ export class FacilitiesComponent implements OnInit {
     city: '',
     discipline: '',
     minRating: 0,
-    maxRating: 5
+    maxRating: 10
   };
 
   // Inject Router into the component
