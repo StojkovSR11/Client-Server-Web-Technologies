@@ -56,7 +56,7 @@ public class Exercise {
         this.facility.setId(facilityId);
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "discipline_id", nullable = true)
     @JsonIgnore
     private Discipline discipline;
