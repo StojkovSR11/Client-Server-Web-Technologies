@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +34,22 @@ public class ExerciseController {
     }
 
     @PostMapping
-    public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
+    public ResponseEntity<?> createExercise(@RequestBody Exercise exercise) {
+        // Validate if the date is in the future
+        LocalDate currentDate = LocalDate.now();
+        if (exercise.getDate().isBefore(currentDate)) {
+            return new ResponseEntity<>("The date must be in the future.", HttpStatus.BAD_REQUEST);
+        }
+
+        // Validate if fromTime is less than untilTime
+        LocalTime fromTime = exercise.getFromTime();
+        LocalTime untilTime = exercise.getUntilTime();
+
+        if (!fromTime.isBefore(untilTime)) {
+            return new ResponseEntity<>("The fromTime must be earlier than the untilTime.", HttpStatus.BAD_REQUEST);
+        }
+
+        // If both validations pass, save the exercise
         Exercise savedExercise = exerciseService.save(exercise);
         return new ResponseEntity<>(savedExercise, HttpStatus.CREATED);
     }

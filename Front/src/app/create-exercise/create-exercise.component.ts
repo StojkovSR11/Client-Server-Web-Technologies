@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // Import this for error handling
 
 @Component({
   selector: 'app-create-exercise',
@@ -25,6 +26,7 @@ export class CreateExerciseComponent {
     facilityId: 0,
     date: ''
   };
+  errorMessage: string | null = null; // Error message to display
 
   constructor(
     private exerciseService: ExerciseService,
@@ -41,9 +43,20 @@ export class CreateExerciseComponent {
 
   createExercise(form: NgForm): void {
     if (form.valid) {
-      this.exerciseService.createExercise(this.exercise).subscribe(() => {
-        this.router.navigate([`/facilities/${this.facilityId}`]);
-      });
+      this.exerciseService.createExercise(this.exercise).subscribe(
+        () => {
+          // On success, navigate to the facility page
+          this.router.navigate([`/facilities/${this.facilityId}`]);
+        },
+        (error: HttpErrorResponse) => {
+          // Handle any errors that come from the backend
+          if (error.status === 400) {
+            this.errorMessage = error.error; // Set error message from backend
+          } else {
+            this.errorMessage = 'An unexpected error occurred. Please try again.';
+          }
+        }
+      );
     }
   }
 
