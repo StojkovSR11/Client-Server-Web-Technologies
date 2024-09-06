@@ -3,6 +3,7 @@ package com.example.SVT_KVT.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -82,6 +83,32 @@ public class WorkDay {
     public void setFacility(Facility facility) {
         this.facility = facility;
     }
+    public static DayOfWeek toDayOfWeek(Day day) {
+        switch (day) {
+            case MONDAY: return DayOfWeek.MONDAY;
+            case TUESDAY: return DayOfWeek.TUESDAY;
+            case WEDNESDAY: return DayOfWeek.WEDNESDAY;
+            case THURSDAY: return DayOfWeek.THURSDAY;
+            case FRIDAY: return DayOfWeek.FRIDAY;
+            case SATURDAY: return DayOfWeek.SATURDAY;
+            case SUNDAY: return DayOfWeek.SUNDAY;
+            default: throw new IllegalArgumentException("Unknown Day: " + day);
+        }
+    }
+
+    public static Day toWorkDay(DayOfWeek dayOfWeek) {
+        switch (dayOfWeek) {
+            case MONDAY: return Day.MONDAY;
+            case TUESDAY: return Day.TUESDAY;
+            case WEDNESDAY: return Day.WEDNESDAY;
+            case THURSDAY: return Day.THURSDAY;
+            case FRIDAY: return Day.FRIDAY;
+            case SATURDAY: return Day.SATURDAY;
+            case SUNDAY: return Day.SUNDAY;
+            default: throw new IllegalArgumentException("Unknown DayOfWeek: " + dayOfWeek);
+        }
+    }
+
 }
 
 
