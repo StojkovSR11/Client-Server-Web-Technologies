@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class FacilityDetailsComponent implements OnInit {
   facility: Facility | undefined;
+  isDropdownOpen = false;  // Controls dropdown visibility
 
   constructor(
     private facilityService: FacilityService,
@@ -44,6 +45,10 @@ export class FacilityDetailsComponent implements OnInit {
 
   createExerciseForDiscipline(disciplineId: number): void {
     this.router.navigate([`/facilities/${this.facility?.id}/add-exercise`, { disciplineId }]);
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 }
 

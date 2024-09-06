@@ -22,21 +22,25 @@
   </ul>
 
   <h4>Reviews</h4>
-  <div *ngFor="let review of facility?.reviews" class="mb-4">
-    <p><strong>Created At:</strong> {{ review.createdAt | date }}</p>
-    
-    <p><strong>Ratings:</strong></p>
-    <ul>
-      <li><strong>Equipment:</strong> {{ review.rate.equipment }}</li>
-      <li><strong>Staff:</strong> {{ review.rate.staff }}</li>
-      <li><strong>Hygiene:</strong> {{ review.rate.hygiene }}</li>
-      <li><strong>Space:</strong> {{ review.rate.space }}</li>
-    </ul>
+  <div class="collapsible-container">
+    <button (click)="toggleDropdown()" class="btn btn-primary">
+      {{ isDropdownOpen ? 'Hide Reviews' : 'Show Reviews' }}
+    </button>
+    <div *ngIf="isDropdownOpen" class="collapsible-content">
+      <div *ngFor="let review of facility?.reviews" class="review-item">
+        <p><strong>Created At:</strong> {{ review.createdAt | date }}</p>
+        
+        <p><strong>Ratings:</strong></p>
+        <ul>
+          <li><strong>Equipment:</strong> {{ review.rate.equipment }}</li>
+          <li><strong>Staff:</strong> {{ review.rate.staff }}</li>
+          <li><strong>Hygiene:</strong> {{ review.rate.hygiene }}</li>
+          <li><strong>Space:</strong> {{ review.rate.space }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
   
-  <button (click)="addReview()" class="btn btn-primary">Add Review</button>
-  <button (click)="goBack()" class="btn btn-secondary">Back to Facilities</button>
+  <button (click)="addReview()" class="btn btn-primary mt-3">Add Review</button>
+  <button (click)="goBack()" class="btn btn-secondary mt-3">Back to Facilities</button>
 </div>
-
-  
-  
